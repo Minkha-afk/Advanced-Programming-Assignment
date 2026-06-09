@@ -1,0 +1,192 @@
+:root {
+  color-scheme: light;
+  color: #1f2937;
+  background:
+    radial-gradient(circle at top left, #fde68a, transparent 32%),
+    radial-gradient(circle at bottom right, #bfdbfe, transparent 28%),
+    #f8fafc;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+body {
+  display: block;
+  min-height: 100vh;
+  background: transparent;
+}
+
+#app {
+  max-width: 1100px;
+  padding: 32px 20px 48px;
+  text-align: left;
+}
+
+.dashboard-shell {
+  display: grid;
+  gap: 20px;
+}
+
+.hero-card,
+.panel {
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+
+.hero-card {
+  padding: 28px;
+}
+
+.hero-card h1,
+.panel h2,
+.student-card h3 {
+  margin: 0;
+}
+
+.hero-card p,
+.panel p {
+  margin-bottom: 0;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  color: #b45309;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.panel {
+  padding: 22px;
+}
+
+.panel-header {
+  margin-bottom: 16px;
+}
+
+.panel-header p {
+  color: #475569;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.form-grid label,
+.filter-box {
+  display: grid;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.form-grid input,
+.filter-box select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #0f172a;
+  box-sizing: border-box;
+}
+
+.primary-button,
+.danger-button {
+  border: 0;
+  color: white;
+}
+
+.primary-button {
+  background: #0f766e;
+}
+
+.danger-button {
+  background: #dc2626;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat-box {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.stat-box strong {
+  font-size: 1.4rem;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.course-chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #0c4a6e;
+  font-size: 0.9rem;
+}
+
+.course-chip.subtle {
+  background: #ecfccb;
+  color: #3f6212;
+}
+
+.student-list {
+  display: grid;
+  gap: 14px;
+}
+
+.student-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+}
+
+.student-card h3 span {
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.empty-state,
+.complexity-text {
+  color: #475569;
+}
+
+@media (max-width: 820px) {
+  .dashboard-grid,
+  .form-grid,
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .student-card {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,273 @@
+import java.util.ArrayList;
+import java.util.List;
+
+// ══════════════════════════════════════════════════════════════════
+//  LIBRARY SYSTEM — Single-file Java OOP Demo
+//  Concepts: Abstraction, Method Overriding, Polymorphism,
+//            Constructor Overloading, Static Counter
+//
+//  STRUCTURE (all in LibrarySystem.java):
+//    abstract class LibraryItem     — abstract base class
+//    class Book                     — adds author, pages, genre
+//    class DVD                      — adds director, duration, rating
+//    public class LibrarySystem     — driver / main()
+// ══════════════════════════════════════════════════════════════════
+
+
+// ──────────────────────────────────────────────────────────────────
+//  ABSTRACT BASE CLASS — LibraryItem
+//  Shows: abstraction, static counter, shared helper method
+// ──────────────────────────────────────────────────────────────────
+abstract class LibraryItem {
+
+    // ── Common fields shared by every item ──
+    private final String title;
+    private final int    year;
+    private final String itemId;
+
+    // ── Static counter: tracks total objects created across ALL subclasses ──
+    private static int totalItemsCreated = 0;
+
+    // ── Constructor ──
+    public LibraryItem(String title, int year) {
+        this.title  = title;
+        this.year   = year;
+        totalItemsCreated++;
+        this.itemId = "ITEM-" + totalItemsCreated;   // auto-generated ID
+    }
+
+    // ── Abstract method — every subclass MUST override ──
+    public abstract void displayInfo();
+
+    // ── Shared helper: subclasses call this inside their displayInfo() ──
+    protected void printCommonInfo() {
+        System.out.println("  ID    : " + itemId);
+        System.out.println("  Title : " + title);
+        System.out.println("  Year  : " + year);
+    }
+
+    // ── Getters ──
+    public String getTitle()  { return title;  }
+    public int    getYear()   { return year;   }
+    public String getItemId() { return itemId; }
+
+    // ── Static getter for the counter ──
+    public static int getTotalItemsCreated() { return totalItemsCreated; }
+}
+
+
+// ──────────────────────────────────────────────────────────────────
+//  SUBCLASS 1 — Book
+//  Shows: constructor overloading (3 constructors), method overriding
+// ──────────────────────────────────────────────────────────────────
+class Book extends LibraryItem {
+
+    private final String author;
+    private final int    pages;
+    private final String genre;
+
+    // ── Constructor 1: Full details ──
+    public Book(String title, int year, String author, int pages, String genre) {
+        super(title, year);
+        this.author = author;
+        this.pages  = pages;
+        this.genre  = genre;
+    }
+
+    // ── Constructor 2: No page count → defaults to 0 ──
+    public Book(String title, int year, String author, String genre) {
+        this(title, year, author, 0, genre);        // chains to Constructor 1
+    }
+
+    // ── Constructor 3: Minimal → only title, year, author ──
+    public Book(String title, int year, String author) {
+        this(title, year, author, 0, "Unknown");    // chains to Constructor 1
+    }
+
+    // ── METHOD OVERRIDING ──
+    @Override
+    public void displayInfo() {
+        System.out.println("┌─── BOOK ─────────────────────────────────────");
+        printCommonInfo();
+        System.out.println("  Author: " + author);
+        System.out.println("  Genre : " + genre);
+        System.out.println("  Pages : " + (pages > 0 ? pages : "N/A"));
+        System.out.println("└──────────────────────────────────────────────");
+    }
+
+    public String getAuthor() { return author; }
+    public int    getPages()  { return pages;  }
+    public String getGenre()  { return genre;  }
+}
+
+
+// ──────────────────────────────────────────────────────────────────
+//  SUBCLASS 2 — DVD
+//  Shows: constructor overloading (2 constructors), method overriding
+// ──────────────────────────────────────────────────────────────────
+class DVD extends LibraryItem {
+
+    private final String director;
+    private final int    durationMinutes;
+    private final String genre;
+    private final String rating;            // e.g. "PG-13", "NR"
+
+    // ── Constructor 1: Full details ──
+    public DVD(String title, int year, String director,
+               int durationMinutes, String genre, String rating) {
+        super(title, year);
+        this.director        = director;
+        this.durationMinutes = durationMinutes;
+        this.genre           = genre;
+        this.rating          = rating;
+    }
+
+    // ── Constructor 2: No rating → defaults to "NR" ──
+    public DVD(String title, int year, String director,
+               int durationMinutes, String genre) {
+        this(title, year, director, durationMinutes, genre, "NR");  // chains to Constructor 1
+    }
+
+    // ── Helper: convert minutes → "2h 49m" format ──
+    private String formatDuration() {
+        int h = durationMinutes / 60;
+        int m = durationMinutes % 60;
+        return (h > 0 ? h + "h " : "") + m + "m";
+    }
+
+    // ── METHOD OVERRIDING ──
+    @Override
+    public void displayInfo() {
+        System.out.println("┌─── DVD ──────────────────────────────────────");
+        printCommonInfo();
+        System.out.println("  Director : " + director);
+        System.out.println("  Genre    : " + genre);
+        System.out.println("  Duration : " + formatDuration());
+        System.out.println("  Rating   : " + rating);
+        System.out.println("└──────────────────────────────────────────────");
+    }
+
+    public String getDirector()        { return director;        }
+    public int    getDurationMinutes() { return durationMinutes; }
+    public String getGenre()           { return genre;           }
+    public String getRating()          { return rating;          }
+}
+
+
+// ──────────────────────────────────────────────────────────────────
+//  DRIVER — public class (must match filename: LibrarySystem.java)
+// ──────────────────────────────────────────────────────────────────
+public class LibrarySystem {
+
+    public static void main(String[] args) {
+
+        // ── Build catalog — polymorphic collection ─────────────────
+        List<LibraryItem> catalog = new ArrayList<>();
+
+        // Books — all three overloaded constructors used
+        catalog.add(new Book("Clean Code",
+                             2008, "Robert C. Martin", 464, "Software Engineering"));
+
+        catalog.add(new Book("The Pragmatic Programmer",
+                             1999, "Andrew Hunt", "Software Engineering"));
+
+        catalog.add(new Book("Dune", 1965, "Frank Herbert"));
+
+        // DVDs — with and without rating
+        catalog.add(new DVD("Interstellar",
+                            2014, "Christopher Nolan", 169, "Sci-Fi", "PG-13"));
+
+        catalog.add(new DVD("Parasite",
+                            2019, "Bong Joon-ho", 132, "Thriller"));
+
+        // ── POLYMORPHISM: loop over LibraryItem references ─────────
+        // Java resolves the correct displayInfo() at runtime
+        System.out.println("╔══════════════════════════════════════════════╗");
+        System.out.println("║             LIBRARY CATALOG                  ║");
+        System.out.println("╚══════════════════════════════════════════════╝\n");
+
+        for (LibraryItem item : catalog) {
+            item.displayInfo();
+            System.out.println();
+        }
+
+        // ── Static counter ─────────────────────────────────────────
+        System.out.println("══════════════════════════════════════════════");
+        System.out.println("  Total items created : " + LibraryItem.getTotalItemsCreated());
+        System.out.println("══════════════════════════════════════════════");
+
+        // ── Filter Books only (instanceof + pattern matching) ──────
+        System.out.println("\n  Books in catalog:");
+        for (LibraryItem item : catalog) {
+            if (item instanceof Book book) {
+                System.out.printf("    %-35s by %s%n", book.getTitle(), book.getAuthor());
+            }
+        }
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   EXPECTED OUTPUT
+   ══════════════════════════════════════════════════════════════════
+
+╔══════════════════════════════════════════════╗
+║             LIBRARY CATALOG                  ║
+╚══════════════════════════════════════════════╝
+
+┌─── BOOK ─────────────────────────────────────
+  ID    : ITEM-1
+  Title : Clean Code
+  Year  : 2008
+  Author: Robert C. Martin
+  Genre : Software Engineering
+  Pages : 464
+└──────────────────────────────────────────────
+
+┌─── BOOK ─────────────────────────────────────
+  ID    : ITEM-2
+  Title : The Pragmatic Programmer
+  Year  : 1999
+  Author: Andrew Hunt
+  Genre : Software Engineering
+  Pages : N/A
+└──────────────────────────────────────────────
+
+┌─── BOOK ─────────────────────────────────────
+  ID    : ITEM-3
+  Title : Dune
+  Year  : 1965
+  Author: Frank Herbert
+  Genre : Unknown
+  Pages : N/A
+└──────────────────────────────────────────────
+
+┌─── DVD ──────────────────────────────────────
+  ID       : ITEM-4
+  Title    : Interstellar
+  Year     : 2014
+  Director : Christopher Nolan
+  Genre    : Sci-Fi
+  Duration : 2h 49m
+  Rating   : PG-13
+└──────────────────────────────────────────────
+
+┌─── DVD ──────────────────────────────────────
+  ID       : ITEM-5
+  Title    : Parasite
+  Year     : 2019
+  Director : Bong Joon-ho
+  Genre    : Thriller
+  Duration : 2h 12m
+  Rating   : NR
+└──────────────────────────────────────────────
+
+══════════════════════════════════════════════
+  Total items created : 5
+══════════════════════════════════════════════
+
+  Books in catalog:
+    Clean Code                          by Robert C. Martin
+    The Pragmatic Programmer            by Andrew Hunt
+    Dune                                by Frank Herbert
+*/
