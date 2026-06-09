@@ -1,12 +1,21 @@
-# Assignment 11: Library Items with Abstraction in Python
+# Assignment 11
 
-This branch contains the submission for Assignment 11.
+## Question
 
-## Contents
-- assign11.py
+Design a library system in Java or Python with:
 
-## How to Run
-Run with python assign11.py.
+A base/abstract class LibraryItem (common fields like title, year)
+An abstract/common method displayInfo()
 
-## Notes
-Only the source/submission files are included here. Generated binaries and build output are intentionally excluded.
+Create subclasses such as:
+
+Book (add author)
+DVD (add duration/genre)
+
+Your implementation should clearly show:
+
+Use of abstraction (common structure in base class)
+Method overriding in subclasses
+Polymorphism using a collection of LibraryItem objects
+One additional feature:
+constructor overloading / default arguments OR class/static counter
