@@ -1,12 +1,23 @@
-# Assignment 9: Banking System Java Program
+# Assignment 9
 
-This branch contains the submission for Assignment 9.
+## Question
 
-## Contents
-- assign9.java
+Design a banking system in Java with:
 
-## How to Run
-Compile with javac assign9.java and run the public class.
+A base class Account containing private fields: accountNumber, ownerName, balance
+Provide getters/setters and at least two constructors (use constructor chaining)
+Implement deposit() and withdraw() with proper validation
+Add a display() method
 
-## Notes
-Only the source/submission files are included here. Generated binaries and build output are intentionally excluded.
+Extend it with:
+
+SavingsAccount (add interestRate, override display() and show interest)
+CurrentAccount (add overdraftLimit, restrict withdrawals accordingly)
+
+Your implementation should clearly show:
+
+Proper encapsulation (no direct field access)
+Use of constructor overloading and chaining (this(...))
+Inheritance and method overriding (use @Override and super)
+Polymorphism by storing objects in an Account reference list and calling display()
+Basic validation/debugging (e.g., assert or exception for invalid operations)
