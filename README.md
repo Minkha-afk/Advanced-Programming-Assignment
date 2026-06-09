@@ -1,12 +1,6 @@
-# Assignment 3: Book Search Java Program
+# Assignment 3
 
-This branch contains the submission for Assignment 3.
+## Question
 
-## Contents
-- assign3.java
-
-## How to Run
-Compile with javac assign3.java and run the public class.
-
-## Notes
-Only the source/submission files are included here. Generated binaries and build output are intentionally excluded.
+Write a Java program using ArrayList to store book titles.
+Add at least 5 books and search for books whose title contains a given word
