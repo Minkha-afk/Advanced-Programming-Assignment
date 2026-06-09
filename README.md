@@ -1,12 +1,6 @@
-# Assignment 4: Product Stock Filter in Python
+# Assignment 4
 
-This branch contains the submission for Assignment 4.
+## Question
 
-## Contents
-- assign4.py
-
-## How to Run
-Run with python assign4.py.
-
-## Notes
-Only the source/submission files are included here. Generated binaries and build output are intentionally excluded.
+Create a Python program using a list and dictionary to store products with name and stock quantity.
+Display all products whose stock is less than 10.
