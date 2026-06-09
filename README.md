@@ -1,13 +1,6 @@
-# Assignment 5: React Assignment App
+# Assignment 5
 
-This branch contains the submission for Assignment 5.
+## Question
 
-## Contents
-- my-react-app
-
-## How to Run
-Run from my-react-app with npm install and npm run dev.
-
-## Notes
-Only the source/submission files are included here. Generated binaries and build output are intentionally excluded.
-The same my-react-app folder is used for this branch as requested.
+Create a simple React component that maintains a list of todos using useState.
+Allow the user to add a todo and display all added todos on the screen.
