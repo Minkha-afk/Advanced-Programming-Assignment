@@ -1,12 +1,5 @@
-# Assignment 2: Space Complexity Examples in C
+# Assignment 2
 
-This branch contains the submission for Assignment 2.
+## Question
 
-## Contents
-- assign2.c
-
-## How to Run
-Compile with gcc assign2.c -o assign2 and run the generated program.
-
-## Notes
-Only the source/submission files are included here. Generated binaries and build output are intentionally excluded.
+Write a c program for three different operations as stated in question 1 to analyze the space complexity.
