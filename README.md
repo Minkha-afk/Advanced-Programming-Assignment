@@ -1,12 +1,21 @@
-# Assignment 10: Student and Address Python Classes
+# Assignment 10
 
-This branch contains the submission for Assignment 10.
+## Question
 
-## Contents
-- assign10.py
+Design a student system in Python with:
 
-## How to Run
-Run with python assign10.py.
+Address class (street, city, zipCode)
+Student class with name, age, Address, and course list
+Store age as a protected attribute and control it using @property
+Methods: add_course() and display()
 
-## Notes
-Only the source/submission files are included here. Generated binaries and build output are intentionally excluded.
+Extend it with:
+
+ScholarshipStudent (add scholarshipAmount and override display())
+
+Your implementation should clearly show:
+
+Composition (Student HAS-A Address)
+Proper data validation using @property (age must be valid)
+Inheritance and overriding (use super() in display)
+Understanding of mutable behavior (course list updates persist)
